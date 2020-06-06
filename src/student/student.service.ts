@@ -9,10 +9,14 @@ import { Repository } from 'typeorm';
 export class StudentService {
   constructor(
     @InjectRepository(Student) private studentRepository: Repository<Student>,
-  ) {}
+  ) { }
 
   getStudents(): Promise<Student[]> {
     return this.studentRepository.find();
+  }
+
+  getStudent(id: string): Promise<Student> {
+    return this.studentRepository.findOne({ id });
   }
 
   createStudent(createLessonInput: CreateStudentInput): Promise<Student> {
